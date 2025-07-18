@@ -9,23 +9,45 @@
     "rewrites": [
       {
         "source": "/static/**",
-        "destination": "/static/**"
+        "run": {
+          "serviceId": "profitpoke-api",
+          "region": "us-central1"
+        }
       },
       {
         "source": "/recommend",
-        "destination": "http://127.0.0.1:5003/recommend"
+        "run": {
+          "serviceId": "profitpoke-api",
+          "region": "us-central1"
+        }
       },
       {
         "source": "/callback",
-        "destination": "http://127.0.0.1:5003/callback"
+        "run": {
+          "serviceId": "profitpoke-api",
+          "region": "us-central1"
+        }
       },
       {
         "source": "/postback",
-        "destination": "http://127.0.0.1:5003/postback"
+        "run": {
+          "serviceId": "profitpoke-api",
+          "region": "us-central1"
+        }
       },
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/health",
+        "run": {
+          "serviceId": "profitpoke-api",
+          "region": "us-central1"
+        }
+      },
+      {
+        "source": "/**",
+        "run": {
+          "serviceId": "profitpoke-api",
+          "region": "us-central1"
+        }
       }
     ]
   }

@@ -79,7 +79,7 @@ def serve_manifest():
         "lang": "en",
         "icons": [
             {
-                "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMzIiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM3NC41IDQ4IDU2IDY2LjUgNTYgODhWMTQ0QzU2IDE2NS41IDc0LjUgMTg0IDk2IDE4NCMxMTcuNSAxODQgMTM2IDE2NS41IDEzNiAxNDRWODhDMTM2IDY2LjUgMTE3LjUgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOTYgNzJDODcuMiA3MiA4MCA3OS4yIDgwIDg4Vjk2SDExMlY4OEMxMTIgNzkuMiAxMDQuOCA3MiA5NiA3MloiIGZpbGw9IiM2NjdlZWEiLz4KPGF0aCBkPSJNODAgMTA0VjE0NEM4MCA1Mi44IDg3LjIgMTYwIDk2IDE2MEMxMDQuOCAxNjAgMTEyIDE1Mi44IDExMiAxNDRWMTA0SDgwWiIgZmlsbD0iIzc2NGJhMiIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+",
+                "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMzIiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM3NC41IDQ4IDU2IDY2LjUgNTYgODhWMTQ0QzU2IDE2NS41IDc0LjUgMTg0IDk2IDE4NCMxMTcuNSAxODQgMTM2IDE2NS41IDEzNiAxNDRWODhDMTM2IDY2LjUgMTE3LjUgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOTYgNzJDODcuMiA3MiA4MCA3N9YyIDgwIDg4Vjk2SDExMlY4OEMxMTIgNzkuMiAxMDQuOCA3MiA5NiA3MloiIGZpbGw9IiM2NjdlZWEiLz4KPGF0aCBkPSJNODAgMTA0VjE0NEM4MCA1Mi44IDg3LjIgMTYwIDk2IDE2MEMxMDQuOCAxNjAgMTEyIDE1Mi44IDExMiAxNDRWMTA0SDgwWiIgZmlsbD0iIzc2NGJhMiIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+",
                 "sizes": "192x192",
                 "type": "image/svg+xml"
             },
@@ -91,6 +91,15 @@ def serve_manifest():
         ]
     }
     return json.dumps(manifest), 200, {'Content-Type': 'application/json'}
+
+@app.route('/health')
+def health_check():
+    """Health check endpoint for Cloud Run"""
+    return jsonify({
+        'status': 'healthy',
+        'service': 'profitpoke-api',
+        'version': '1.0.0'
+    }), 200
 
 class RecommendationForm(FlaskForm):
     price_range = SelectField('Price Range (INR)', choices=[
