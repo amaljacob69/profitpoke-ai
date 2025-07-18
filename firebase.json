@@ -8,41 +8,6 @@
     ],
     "rewrites": [
       {
-        "source": "/static/**",
-        "run": {
-          "serviceId": "profitpoke-api",
-          "region": "us-central1"
-        }
-      },
-      {
-        "source": "/recommend",
-        "run": {
-          "serviceId": "profitpoke-api",
-          "region": "us-central1"
-        }
-      },
-      {
-        "source": "/callback",
-        "run": {
-          "serviceId": "profitpoke-api",
-          "region": "us-central1"
-        }
-      },
-      {
-        "source": "/postback",
-        "run": {
-          "serviceId": "profitpoke-api",
-          "region": "us-central1"
-        }
-      },
-      {
-        "source": "/health",
-        "run": {
-          "serviceId": "profitpoke-api",
-          "region": "us-central1"
-        }
-      },
-      {
         "source": "/**",
         "run": {
           "serviceId": "profitpoke-api",
