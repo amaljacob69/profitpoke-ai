@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: profitpoke-ai
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    envVars:
+      - key: FLASK_SECRET_KEY
+        sync: false
+      - key: KITE_API_KEY
+        sync: false
+      - key: KITE_API_SECRET
+        sync: false
+      - key: GROK_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.13.2"
+    healthCheckPath: /
+    domains:
+      - profitpoke-ai.onrender.com

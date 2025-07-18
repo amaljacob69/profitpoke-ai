@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfitPoke AI - Stock Recommendations</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#667eea">
+</head>
+<body>
+    <header class="text-center py-3">
+        <h1>ProfitPoke AI</h1>
+        <p>Unlock Smart Stock Insights with AI</p>
+    </header>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert-container">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% for field, errors in form.errors.items() %}
+            <div class="alert alert-danger alert-dismissible fade show">
+                {{ form[field].label }}: {{ ', '.join(errors) }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+
+        <form id="recommendationForm" class="mb-4">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.price_range.label(class="form-label") }}
+                {{ form.price_range(class="form-select", required=True) }}
+            </div>
+            <div class="mb-3">
+                {{ form.time_horizon.label(class="form-label") }}
+                {{ form.time_horizon(class="form-select", required=True) }}
+            </div>
+            <div class="mb-3">
+                {{ form.risk_level.label(class="form-label") }}
+                {{ form.risk_level(class="form-select", required=True) }}
+            </div>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+
+        <div id="loadingSpinner" class="d-none text-center">
+            <div class="spinner-border" role="status"></div>
+            <p id="loadingText">AI Recommendation in Progress...</p>
+        </div>
+        <div id="results" class="mt-4"></div>
+
+        <div class="modal fade" id="savedModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Saved Recommendations</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="savedRecommendations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-3">
+        <p>Powered by AI</p>
+        <p>Disclaimer: Recommendations are for informational purposes only and not financial advice. Consult a financial advisor before making investment decisions.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

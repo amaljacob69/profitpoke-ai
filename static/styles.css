@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+header, footer {
+    background-color: #343a40;
+    color: white;
+}
+header h1 {
+    font-size: 2.5rem;
+}
+header p {
+    font-size: 1.2rem;
+}
+.container {
+    max-width: 800px;
+}
+.alert {
+    margin-top: 1rem;
+}
+#loadingSpinner {
+    margin-top: 2rem;
+}
+#loadingText {
+    margin-top: 1rem;
+    font-style: italic;
+}
+#results {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+}
+.copy-btn {
+    margin-left: 10px;
+}

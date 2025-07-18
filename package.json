@@ -1,0 +1,11 @@
+{
+  "name": "stock-recommendation-app",
+  "version": "1.0.0",
+  "description": "Frontend for stock recommendation app",
+  "dependencies": {
+    "firebase-tools": "^13.0.0"
+  },
+  "scripts": {
+    "deploy": "firebase deploy --only hosting"
+  }
+}

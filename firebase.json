@@ -1,0 +1,32 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/static/**",
+        "destination": "/static/**"
+      },
+      {
+        "source": "/recommend",
+        "destination": "http://127.0.0.1:5003/recommend"
+      },
+      {
+        "source": "/callback",
+        "destination": "http://127.0.0.1:5003/callback"
+      },
+      {
+        "source": "/postback",
+        "destination": "http://127.0.0.1:5003/postback"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
