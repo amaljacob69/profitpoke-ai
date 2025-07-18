@@ -343,6 +343,41 @@ def home():
 
     return render_template('index.html', form=form, stocks=stocks, request_id=request_id)
 
+@app.route('/robots.txt')
+def robots_txt():
+    """Serve robots.txt for SEO"""
+    try:
+        with open('public/robots.txt', 'r') as f:
+            response = make_response(f.read())
+            response.headers['Content-Type'] = 'text/plain'
+            return response
+    except FileNotFoundError:
+        return "User-agent: *\nAllow: /", 200, {'Content-Type': 'text/plain'}
+
+@app.route('/sitemap.xml')
+def sitemap_xml():
+    """Serve sitemap.xml for SEO"""
+    try:
+        with open('public/sitemap.xml', 'r') as f:
+            response = make_response(f.read())
+            response.headers['Content-Type'] = 'application/xml'
+            return response
+    except FileNotFoundError:
+        return "<?xml version='1.0' encoding='UTF-8'?><urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'></urlset>", 200, {'Content-Type': 'application/xml'}
+
+@app.route('/postback', methods=['POST'])
+def postback():
+    """Handle Kite Connect postback webhooks"""
+    try:
+        data = request.get_json()
+        logger.info(f"Received postback: {data}")
+        # Process the postback data here
+        # This could include order updates, position changes, etc.
+        return jsonify({'status': 'success'}), 200
+    except Exception as e:
+        logger.error(f"Postback error: {str(e)}")
+        return jsonify({'error': 'Invalid postback data'}), 400
+
 @app.route('/callback')
 def callback():
     request_token = request.args.get('request_token')

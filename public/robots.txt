@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+Disallow: /callback
+Disallow: /postback
+Disallow: /health
+Disallow: /static/manifest.json
+
+# Sitemap location
+Sitemap: https://www.profitpoke.in/sitemap.xml
+Sitemap: https://profit-poke.web.app/sitemap.xml
+
+# Crawl delay (optional - helps prevent overloading)
+Crawl-delay: 1
